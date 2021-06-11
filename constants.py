@@ -10,3 +10,5 @@ class Constants:
         "green": (0, 125, 0),
         "red": (125, 0, 0)
     }
+
+    ROWS = 20
