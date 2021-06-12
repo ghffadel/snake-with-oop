@@ -8,7 +8,8 @@ import pygame
 class Window:
 	def __init__(self):
 		self.snake = Snake([Constants.WIDTH // 2, Constants.HEIGHT // 2])
-		self.fruit = Cube(Constants.COLORS["red"], [randint(1, Constants.ROWS - 1), randint(1, Constants.ROWS - 1)])
+		# Randint do fruit de (0, 19) em X e (0, 14) em Y
+		self.fruit = Cube(Constants.COLORS["red"], [randint(0, Constants.ROWS - 1), randint(0, Constants.ROWS - 6)])
 		self.window = pygame.display.set_mode((Constants.WIDTH, Constants.HEIGHT))
 
 	def draw_window(self):

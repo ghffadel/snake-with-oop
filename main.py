@@ -16,12 +16,15 @@ def main():
         pygame.time.delay(Constants.FRAMERATE)
         clock.tick(10)
         window.draw_window()
+
         for cube in s.cubes:
             window.draw_cube(cube)
 
         window.draw_cube(window.fruit)
 
         pygame.display.update()
+
+        s.move()
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
