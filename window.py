@@ -21,3 +21,8 @@ class Window:
 			pygame.draw.line(self.window, Constants.COLORS["white"], (0, y), (Constants.WIDTH, y))
 
 		pygame.display.update()
+
+	def draw_cube(self, cube):
+		distance = Constants.WIDTH // Constants.ROWS
+		x, y = cube.pos
+		pygame.draw.rect(self.window, cube.color, (x * distance+1, y * distance+1, distance-2, distance-2))
