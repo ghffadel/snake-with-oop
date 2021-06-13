@@ -34,8 +34,26 @@ class Snake:
 		x, y = self.head.pos
 		dx, dy = self.head_direction
 
-		# if not (0 <= x < Constants.ROWS - 1 and 0 <= y < Constants.ROWS - 6):
-		# 	self.head.pos = 
+		limit_x = Constants.ROWS
+		limit_y = Constants.ROWS - 5
+
+		if not (0 <= x < limit_x and 0 <= y < limit_y):
+
+			if self.head.pos[0] > limit_x:
+				x = -1
+				y = self.head.pos[1]
+
+			elif self.head.pos[0] < 0:
+				x = limit_x
+				y = self.head.pos[1]
+
+			elif self.head.pos[1] > limit_y:
+				x = self.head.pos[0]
+				y = -1
+
+			elif self.head.pos[1] < 0:
+				x = self.head.pos[0]
+				y = limit_y
 
 		self.head.pos = (x + dx, y + dy)
 

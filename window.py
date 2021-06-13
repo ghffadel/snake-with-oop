@@ -13,7 +13,10 @@ class Window:
 		self.window = pygame.display.set_mode((Constants.WIDTH, Constants.HEIGHT))
 
 	def generate_position(self):
-		return (randint(0, Constants.ROWS - 1), randint(0, Constants.ROWS - 6))
+		while True:
+			pos = (randint(0, Constants.ROWS - 1), randint(0, Constants.ROWS - 6))
+			if pos not in [cube.pos for cube in self.snake.cubes]:
+				return pos
 
 	def draw_window(self):
 		self.window.fill(Constants.COLORS["black"])
