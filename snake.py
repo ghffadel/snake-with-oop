@@ -6,7 +6,9 @@ from constants import Constants
 class Snake:
 
 	def __init__(self, pos):
-		self.cubes = [Cube(Constants.COLORS["green"], pos)]
+		self.head = Cube(Constants.COLORS["green"], pos)
+		self.head_direction = (0, 0)
+		self.cubes = []
 		self.size = 1
 
 	def move(self):
@@ -16,31 +18,35 @@ class Snake:
 
 			keys = pygame.key.get_pressed()
 
-			x, y = self.cubes[-1].pos
-
 			for key in keys:
 				if keys[pygame.K_LEFT]:
-					self.cubes[-1].direction = (-1, 0)
+					self.head_direction = (-1, 0)
 
 				elif keys[pygame.K_RIGHT]:
-					self.cubes[-1].direction = (1, 0)
+					self.head_direction = (1, 0)
 
 				elif keys[pygame.K_UP]:
-					self.cubes[-1].direction = (0, -1)
+					self.head_direction = (0, -1)
 
 				elif keys[pygame.K_DOWN]:
-					self.cubes[-1].direction = (0, 1)
+					self.head_direction = (0, 1)
+		
+		x, y = self.head.pos
+		dx, dy = self.head_direction
 
-			dx, dy = self.cubes[-1].direction
+		# if not (0 <= x < Constants.ROWS - 1 and 0 <= y < Constants.ROWS - 6):
+		# 	self.head.pos = 
 
-			self.cubes[-1].pos = (x + dx, y + dy)
+		self.head.pos = (x + dx, y + dy)
 
-			self.cubes.append(Cube(Constants.COLORS["green"], self.cubes[0].pos))
+		self.cubes.append(Cube(Constants.COLORS["green"], self.head.pos))
 
-			if len(self.cubes) > self.size:
-				del self.cubes[0]
+		if len(self.cubes) > self.size:
+			del self.cubes[0]
 
 	def check_collision(self, fruit):
-		if self.cubes[-1] == fruit.pos:
+		if self.cubes[-1].pos == fruit.pos:
 			self.size += 1
+			return True
 
+		return False

@@ -8,23 +8,33 @@ import pygame
 def main():
     window = Window()
     clock = pygame.time.Clock()
-    s = Snake((Constants.ROWS // 2, Constants.ROWS // 3))
 
     flag = True
 
     while flag:
         pygame.time.delay(Constants.FRAMERATE)
         clock.tick(10)
+
         window.draw_window()
 
-        for cube in s.cubes:
+        for cube in window.snake.cubes:
             window.draw_cube(cube)
 
         window.draw_cube(window.fruit)
 
         pygame.display.update()
 
-        s.move()
+        window.snake.move()
+
+        positions = [cube.pos for cube in window.snake.cubes]
+
+        for pos in positions:
+            if positions.count(pos) > 1:
+                flag = False
+                break
+
+        if window.snake.check_collision(window.fruit):
+            window.fruit.pos = window.generate_position()
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

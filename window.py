@@ -7,10 +7,13 @@ import pygame
 
 class Window:
 	def __init__(self):
-		self.snake = Snake([Constants.WIDTH // 2, Constants.HEIGHT // 2])
+		self.snake = Snake((Constants.ROWS // 2, Constants.ROWS // 3))
 		# Randint do fruit de (0, 19) em X e (0, 14) em Y
-		self.fruit = Cube(Constants.COLORS["red"], [randint(0, Constants.ROWS - 1), randint(0, Constants.ROWS - 6)])
+		self.fruit = Cube(Constants.COLORS["red"], self.generate_position())
 		self.window = pygame.display.set_mode((Constants.WIDTH, Constants.HEIGHT))
+
+	def generate_position(self):
+		return (randint(0, Constants.ROWS - 1), randint(0, Constants.ROWS - 6))
 
 	def draw_window(self):
 		self.window.fill(Constants.COLORS["black"])
