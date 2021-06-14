@@ -8,7 +8,8 @@ class Constants:
         "black": (0, 0, 0),
         "white": (255, 255, 255),
         "green": (0, 125, 0),
-        "red": (125, 0, 0)
+        "red": (125, 0, 0),
+        "blue": (0, 0, 125),
     }
 
     ROWS = 20
