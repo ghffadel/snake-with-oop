@@ -6,7 +6,7 @@ from constants import Constants
 class Snake:
     def __init__(self, color, pos):
         self.color = color
-        self.head = Cube(Constants().COLORS[color], pos)
+        self.head = Cube(Constants.COLORS[color], pos)
         self.head_direction = (0, 0)
         self.cubes = []
         self.size = 1
