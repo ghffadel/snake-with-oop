@@ -34,18 +34,17 @@ class Snake:
 
                 keys = pygame.key.get_pressed()
 
-                for key in keys:
-                    if keys[pygame.K_LEFT]:
-                        self.head_direction = (-1, 0)
+                if keys[pygame.K_LEFT]:
+                    self.head_direction = (-1, 0)
 
-                    elif keys[pygame.K_RIGHT]:
-                        self.head_direction = (1, 0)
+                elif keys[pygame.K_RIGHT]:
+                    self.head_direction = (1, 0)
 
-                    elif keys[pygame.K_UP]:
-                        self.head_direction = (0, -1)
+                elif keys[pygame.K_UP]:
+                    self.head_direction = (0, -1)
 
-                    elif keys[pygame.K_DOWN]:
-                        self.head_direction = (0, 1)
+                elif keys[pygame.K_DOWN]:
+                    self.head_direction = (0, 1)
 
         self.update_position()
 

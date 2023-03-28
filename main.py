@@ -4,49 +4,54 @@ from snake import Snake
 from cube import Cube
 import pygame
 
+def draw_snake (cubes):
+    for cube in cubes:
+        window.draw_cube(cube)
 
-def main():
+def draw_elements ():
+    window.draw_window()
+
+    draw_snake(window.snake.cubes)
+    draw_snake(window.bot.cubes)
+
+    window.draw_cube(window.fruit)
+
+def handle_movement ():
+    window.snake.move()
+    window.bot.move(True, window.fruit.pos)
+
+def handle_collisions ():
+    player_positions = [cube.pos for cube in window.snake.cubes]
+    bot_positions = [cube.pos for cube in window.bot.cubes]
+
+    for position in player_positions:
+        if player_positions.count(position) > 1 or position in bot_positions:
+            exit()
+
+    if window.snake.check_collision(window.fruit) or window.bot.check_collision(window.fruit):
+        window.fruit.pos = window.generate_position()
+
+def main ():
+    global window
+
     window = Window()
     clock = pygame.time.Clock()
 
-    flag = True
-
-    while flag:
+    while True:
         pygame.time.delay(Constants.FRAMERATE)
         clock.tick(10)
 
-        window.draw_window()
-
-        for cube in window.snake.cubes:
-            window.draw_cube(cube)
-
-        for cube in window.bot.cubes:
-            window.draw_cube(cube)
-
-        window.draw_cube(window.fruit)
+        draw_elements()
 
         pygame.display.update()
 
-        window.snake.move()
-        window.bot.move(True, window.fruit.pos)
-
-        positions = [cube.pos for cube in window.snake.cubes]
-
-        for pos in positions:
-            if positions.count(pos) > 1 or pos in [
-                cube.pos for cube in window.bot.cubes
-            ]:
-                flag = False
-                break
-
-        if window.snake.check_collision(
-            window.fruit
-        ) or window.bot.check_collision(window.fruit):
-            window.fruit.pos = window.generate_position()
+        handle_movement()
+        
+        handle_collisions()
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
 
-
-main()
+if __name__ == "__main__":
+    main()
